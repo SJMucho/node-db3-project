@@ -4,8 +4,8 @@ function find() {
   return db("schemes as sc")
     .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
     .select("sc.scheme_name", "st.*")
-    .count("st.step_id as number_of_steps")
     .groupBy("sc.scheme_id")
+    .count("st.step_id as number_of_steps")
     .where("st.scheme_id", scheme_id);
   // .orderBy("st.step_number asc");
 
