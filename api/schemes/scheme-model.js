@@ -1,16 +1,10 @@
 const db = require("../../data/db-config.js");
 
 function find() {
-  return db("schemes as sc")
-    .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
-    .select("sc.scheme_name", "st.*")
-    .groupBy("sc.scheme_id")
-    .count("st.step_id as number_of_steps")
-    .where("st.scheme_id", scheme_id);
-  // .orderBy("st.step_number asc");
-
-  // EXERCISE A
-  /*
+  return db("schemes");
+}
+// EXERCISE A
+/*
     1A- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`.
     What happens if we change from a LEFT join to an INNER join?
 
@@ -26,9 +20,16 @@ function find() {
     2A- When you have a grasp on the query go ahead and build it in Knex.
     Return from this function the resulting dataset.
   */
-}
 
 function findById(scheme_id) {
+  return db("schemes as sc")
+    .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
+    .select("sc.scheme_name", "st.*")
+    .groupBy("sc.scheme_id")
+    .count("st.step_id as number_of_steps")
+    .where("st.scheme_id", scheme_id);
+  // .orderBy("st.step_number asc");
+
   // EXERCISE B
   /*
     1B- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`:
